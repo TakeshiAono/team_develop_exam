@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_team, only: %i[show edit update destroy]
+  before_action :check_user_from_team_show, only: %i[edit destroy]
 
   def index
     @teams = Team.all
@@ -15,7 +16,9 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  def edit; end
+  def edit
+    # redirect_to :index, notice: "オーナーではないので編集できません" unless current_user == @team.owner
+  end
 
   def create
     @team = Team.new(team_params)
