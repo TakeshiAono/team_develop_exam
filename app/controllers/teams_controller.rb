@@ -16,9 +16,7 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  def edit
-    # redirect_to :index, notice: "オーナーではないので編集できません" unless current_user == @team.owner
-  end
+  def edit; end
 
   def create
     @team = Team.new(team_params)
@@ -50,8 +48,13 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
-  private
+  def transfer_owner
+    @team = Team.find(params[:team_id])
+    @team.update(owner_id: params[:change_id])
+    redirect_to team_path(Team.find(params[:team_id]).name)
+  end
 
+  private
   def set_team
     @team = Team.friendly.find(params[:id])
   end
@@ -59,4 +62,5 @@ class TeamsController < ApplicationController
   def team_params
     params.fetch(:team, {}).permit %i[name icon icon_cache owner_id keep_team_id]
   end
+
 end
