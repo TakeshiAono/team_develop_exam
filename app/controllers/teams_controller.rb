@@ -51,6 +51,7 @@ class TeamsController < ApplicationController
   def transfer_owner
     @team = Team.find(params[:team_id])
     @team.update(owner_id: params[:change_id])
+    TeamMailer.owner_change_mail(@team.owner,@team.name).deliver
     redirect_to team_path(Team.find(params[:team_id]).name)
   end
 

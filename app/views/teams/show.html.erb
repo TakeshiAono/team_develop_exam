@@ -42,7 +42,7 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' if current_user == @team.owner || current_user == assign.user %></td>
-                      <td><%= link_to I18n.t('views.button.transfer_ownership'), transfer_owner_path(team_id: @team.id, change_id: assign.user.id), method: :get, class: 'btn btn-sm btn-warning' if current_user == @team.owner || current_user == assign.user %></td>
+                      <td><%= link_to I18n.t('views.button.transfer_ownership'), transfer_owner_path(team_id: @team.id, change_id: assign.user.id), method: :get, class: 'btn btn-sm btn-warning' if current_user == @team.owner && assign.user != current_user  %></td>
                     </tr>
                   <% end %>
                 </tbody>

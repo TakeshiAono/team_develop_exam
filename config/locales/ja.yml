@@ -205,6 +205,7 @@ ja:
     pm: 午後
   views:
     messages:
+      owner_change: "オーナーになりました"
       create_agenda: 'アジェンダ作成に成功しました！'
       create_article: '記事作成に成功しました！'
       update_article: '記事更新に成功しました！'
