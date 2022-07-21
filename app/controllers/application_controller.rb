@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   def check_user_from_team_show
     unless current_user == @team.owner
-      flash[:notice] = "オーナー以外のユーザーはチーム編集、自分以外のメンバーの削除はできません"
+      flash[:notice] = "オーナー以外のユーザーは削除できません"
       render :show
     end
   end
