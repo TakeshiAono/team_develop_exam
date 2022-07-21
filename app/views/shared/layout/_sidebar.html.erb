@@ -38,7 +38,9 @@
                   <i class="right fa fa-angle-left"></i>
                 </p>
               </a>
-              <span><button><%= link_to "削除",agenda_path(agenda.id), method: :delete, class:"text-danger" %></button></span>
+              <% if current_user == agenda.team.owner || current_user == agenda.user %>
+                <span><button><%= link_to "削除",agenda_path(agenda.id), method: :delete, class:"text-danger" %></button></span>
+              <% end %>
             </div>
             <ul class="nav nav-treeview" style="display: block;">
               <% agenda.articles.each do |article| %>
