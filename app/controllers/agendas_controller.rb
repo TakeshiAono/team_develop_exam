@@ -22,7 +22,11 @@ class AgendasController < ApplicationController
   end
 
   def destroy
-    
+    binding.irb
+    @agenda = Agenda.find(params[:id])
+    @agenda.destroy
+    redirect_to dashboard_path
+    binding.irb
   end
 
   private
