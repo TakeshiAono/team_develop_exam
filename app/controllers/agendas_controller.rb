@@ -22,11 +22,13 @@ class AgendasController < ApplicationController
   end
 
   def destroy
-    binding.irb
+    byebug
     @agenda = Agenda.find(params[:id])
-    @agenda.destroy
+    if current_user == set_agenda.team.owner || current_user == @agenda.user
+      byebug
+      @agenda.destroy
+    end
     redirect_to dashboard_path
-    binding.irb
   end
 
   private
